@@ -1,14 +1,14 @@
 pipeline {
     agent any
     environment {
-        REPO_URL = 'git@github.com:OsmOVB/Devops_2024_2.git' // Substitua pela URL do seu repositório GitHub
-        SSH_KEY_PATH = "${HOME}/.ssh/id_ed25519"
+        REPO_URL = 'https://github.com/OsmOVB/devOpsaula03.git' // URL do repositório GitHub
+        SSH_KEY_CREDENTIAL_ID = 'my-ssh-key-id' // ID das credenciais SSH
     }
     stages {
         stage('Preparação') {
             steps {
                 // Configurar chave SSH para acessar o repositório
-                sshagent(credentials: ['seu-ssh-credential-id']) {
+                sshagent(credentials: [SSH_KEY_CREDENTIAL_ID]) {
                     sh 'chmod +x ${WORKSPACE}/deploy.sh'
                 }
             }
